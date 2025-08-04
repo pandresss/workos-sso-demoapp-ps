@@ -16,8 +16,8 @@ app.use(
 
 const workos = new WorkOS(process.env.WORKOS_API_KEY)
 const clientID = process.env.WORKOS_CLIENT_ID
-const organizationID = 'org_test_idp'
-const redirectURI = 'http://localhost:8000/callback'
+const connectionID = 'conn_01K1V12K7MPJCPRJPAT6FGMM3R'
+const redirectURI = 'http://localhost:3000/callback'
 const state = ''
 
 router.get('/', function (req, res) {
@@ -41,14 +41,14 @@ router.post('/login', (req, res) => {
     }
 
     if (login_type === 'saml') {
-        params.organization = organizationID
+        params.connection = connectionID
     } else {
         params.provider = login_type
     }
 
     try {
         const url = workos.sso.getAuthorizationURL(params)
-
+            console.log('Redirecting to:', url)
         res.redirect(url)
     } catch (error) {
         res.render('error.ejs', { error: error })
