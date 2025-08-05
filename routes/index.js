@@ -5,11 +5,8 @@ import { WorkOS } from '@workos-inc/node'
 const app = express()
 const router = express.Router()
 
-<<<<<<< HEAD
 app.set('view engine', 'ejs')
 
-=======
->>>>>>> 6249f937f51eae2676e5e67e6374a467f64cb087
 app.use(
     session({
         secret: 'keyboard cat',

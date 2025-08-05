@@ -8,7 +8,7 @@ WorkOS acts as the identity abstraction layer and Okta is used as both the Ident
 
 ---
 
-## 🧰 Technologies Used
+## Technologies Used
 
 - Node.js
 - Express.js
@@ -19,7 +19,7 @@ WorkOS acts as the identity abstraction layer and Okta is used as both the Ident
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 1. Node.js v22+ installed locally
 2. A [WorkOS](https://workos.com) account
@@ -28,7 +28,7 @@ WorkOS acts as the identity abstraction layer and Okta is used as both the Ident
 
 ---
 
-## 🚀 Local Setup Instructions
+## Local Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -42,6 +42,12 @@ cd workos-sso-demoapp-ps
 ```bash
 npm install
 ```
+check versions to ensure proper installion
+
+```bash
+npm -v
+```
+
 
 ### 3. Create a `.env` File
 
@@ -65,7 +71,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔐 Setting up SAML SSO via WorkOS
+## Setting up SAML SSO via WorkOS
 
 ### 1. In WorkOS:
 - Go to your [WorkOS dashboard](https://dashboard.workos.com/organizations).
@@ -89,7 +95,7 @@ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 👥 Enable Directory Sync 
+## Enable Directory Sync 
 
 Directory Sync lets you fetch and view users in your Okta directory through WorkOS.
 
@@ -117,7 +123,7 @@ More info: [WorkOS Directory Sync Docs](https://docs.workos.com/directory-sync/o
 
 ---
 
-## 💻 App Features
+## App Features
 
 - Login page with SSO buttons for SAML, Google, and Microsoft OAuth.
 - Successful login redirects to profile details view.
@@ -126,7 +132,7 @@ More info: [WorkOS Directory Sync Docs](https://docs.workos.com/directory-sync/o
 
 ---
 
-## 🛠 Troubleshooting
+## Troubleshooting issuse I faced. 
 
 - `connection_invalid` – Confirm the Connection ID matches the one from WorkOS.
 - `profile_not_allowed_outside_organization` – User’s email domain must match the WorkOS organization domain.
@@ -134,5 +140,3 @@ More info: [WorkOS Directory Sync Docs](https://docs.workos.com/directory-sync/o
 - Directory users not showing – Ensure SCIM provisioning is active in Okta.
 
 ---
-
-## 📄 License
