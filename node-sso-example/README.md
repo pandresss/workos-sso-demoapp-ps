@@ -81,7 +81,7 @@ If you get an "address already in use" error, make sure nothing else is running 
 - Audience URI: Your WorkOS Client ID
 
 ### 2. Assign Users
-- Assign a test user to the app who has a domain matching your organization (e.g., `user@useremail.com`).
+- Assign a test user to the app who has a domain matching your organization (e.g., `user@galusaenterprisesfuel.com`).
 
 ### 3. Upload Metadata to WorkOS
 - Download the metadata XML from Okta and upload it into your WorkOS SAML Connection settings.
@@ -102,4 +102,7 @@ If you get an "address already in use" error, make sure nothing else is running 
 - If you see a `connection_invalid` error: verify the connection ID in your code matches the one from WorkOS.
 - If you see a `profile_not_allowed_outside_organization` error: ensure your test user’s domain matches the domain listed in your WorkOS organization.
 - If your app doesn’t restart, make sure another app isn't already using port 3000.
-## TEST LINE - EDITED AUG 4
+
+
+
+
