@@ -132,7 +132,7 @@ More info: [WorkOS Directory Sync Docs](https://docs.workos.com/directory-sync/o
 
 ---
 
-## Troubleshooting issuse I faced. 
+## Troubleshooting issues I faced. 
 
 - `connection_invalid` – Confirm the Connection ID matches the one from WorkOS.
 - `profile_not_allowed_outside_organization` – User’s email domain must match the WorkOS organization domain.
