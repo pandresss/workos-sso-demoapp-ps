@@ -1,105 +1,138 @@
+# WorkOS SSO + Directory Sync Demo App – Okta + Node.js
 
-# WorkOS SSO Demo App – Okta + Node.js
+This is a demo app built in Node.js to test both:
+- SAML-based Single Sign-On (SSO)
+- Directory Sync (SCIM) integration
 
-This is a simple demo app built in Node.js to test SAML-based Single Sign-On (SSO) integration using WorkOS as the identity abstraction layer and Okta as the Identity Provider (IdP).
-
-## Technologies Used
-
-- Node.js
-- Express.js
-- JS
-- WorkOS Node SDK
-- Okta (SAML IdP)
+WorkOS acts as the identity abstraction layer and Okta is used as both the Identity Provider (IdP) and Directory provider.
 
 ---
 
-## Prerequisites
+## 🧰 Technologies Used
 
-1. Node.js v22+
-2. A WorkOS account
-3. An Okta developer account
+- Node.js
+- Express.js
+- WorkOS Node SDK
+- EJS templates
+- Okta (SAML IdP + Directory Sync)
+- HTML/CSS
+
+---
+
+## ✅ Prerequisites
+
+1. Node.js v22+ installed locally
+2. A [WorkOS](https://workos.com) account
+3. A [Okta](https://developer.okta.com/signup/) account
 4. Git
 
 ---
 
-## Local Setup Instructions
+## 🚀 Local Setup Instructions
 
 ### 1. Clone the Repository
 
-```
+```bash
 git clone https://github.com/pandresss/workos-sso-demoapp-ps.git
 cd workos-sso-demoapp-ps
 ```
 
 ### 2. Install Dependencies
 
-```
+```bash
 npm install
 ```
 
 ### 3. Create a `.env` File
 
-At the root of the project (`node-sso-example/`), create a file named `.env` and populate it as follows:
+Create a `.env` file in the root of the project (`node-sso-example/`) and add the following:
 
-```
+```env
 WORKOS_API_KEY=sk_test_...
 WORKOS_CLIENT_ID=client_...
 PORT=3000
 ```
 
-(Use your actual values from your WorkOS project dashboard.)
+Use actual values from your [WorkOS Dashboard](https://dashboard.workos.com/).
 
 ### 4. Start the Server
 
-```
+```bash
 npm start
 ```
 
-If you get an "address already in use" error, make sure nothing else is running on port 3000.
+Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## Setting up WorkOS
+## 🔐 Setting up SAML SSO via WorkOS
 
-### 1. Create an Organization in WorkOS
-- Go to your WorkOS dashboard.
-- Create a new Organization (e.g., "OKta Tester Connection").
-- Note the `Organization ID` (e.g., `org_......).
+### 1. In WorkOS:
+- Go to your [WorkOS dashboard](https://dashboard.workos.com/organizations).
+- Create a new Organization.
+- Note the Organization ID (e.g., `org_...`).
 
 ### 2. Create a SAML Connection
-- Choose **SAML** as the connection type.
-- Select Okta as your IdP.
-- Provide the required SAML metadata from Okta.
+- Under the Organization, add a connection.
+- Choose **SAML** → Select **Okta**.
+- Upload the metadata XML file from Okta (below).
+
+### 3. In Okta:
+- Create a new App Integration → SAML 2.0.
+- Set:
+  - **Single Sign-On URL**: `http://localhost:3000/callback`
+  - **Audience URI (SP Entity ID)**: Your WorkOS Client ID.
+- Download the metadata XML and upload it to WorkOS.
+
+### 4. Assign Users
+- In Okta, assign test users to the app with matching email domains (e.g., `user@yourcompany.com`).
 
 ---
 
-## Setting up Okta
+## 👥 Enable Directory Sync 
 
-### 1. Create a New App Integration
-- Application type: SAML 2.0
-- Single Sign-On URL: `http://localhost:3000/callback`
-- Audience URI: Your WorkOS Client ID
+Directory Sync lets you fetch and view users in your Okta directory through WorkOS.
 
-### 2. Assign Users
-- Assign a test user to the app who has a domain matching your organization (e.g., `user@useremail.com`).
+### 1. In WorkOS:
+- Navigate to [Directory Sync](https://dashboard.workos.com/directory-sync).
+- Click **+ Create Directory** → Choose **Okta**.
+- Note the Directory ID (e.g., `directory_...`).
+- You’ll receive a **SCIM Base URL** and **Bearer Token**.
 
-### 3. Upload Metadata to WorkOS
-- Download the metadata XML from Okta and upload it into your WorkOS SAML Connection settings.
+### 2. In Okta:
+- Go to **Applications** → Create App Integration → **SCIM**.
+- Enter:
+  - SCIM Connector Base URL: from WorkOS
+  - Bearer Token: from WorkOS
+- Enable:
+  - **Push Users**
+  - **Push Groups** (optional)
+- Assign users to the SCIM app.
+- Users will begin syncing to WorkOS.
+
+### 3. In the App:
+- Once synced, visit [http://localhost:3000/directory-users](http://localhost:3000/directory-users) to view directory users.
+
+More info: [WorkOS Directory Sync Docs](https://docs.workos.com/directory-sync/overview)
 
 ---
 
-## Running the SSO Flow
+## 💻 App Features
 
-1. Visit `http://localhost:3000`
-2. Select "SAML" as the login method
-3. You’ll be redirected to Okta
-4. After authentication, you’ll be redirected back and see your user profile info including first and last name
+- Login page with SSO buttons for SAML, Google, and Microsoft OAuth.
+- Successful login redirects to profile details view.
+- Directory Sync users shown on a separate `/directory-users` page.
+- Navigation buttons added to move between views.
 
 ---
 
-## Notes / Common Issues
+## 🛠 Troubleshooting
 
-- If you see a `connection_invalid` error: verify the connection ID in your code matches the one from WorkOS.
-- If you see a `profile_not_allowed_outside_organization` error: ensure your test user’s domain matches the domain listed in your WorkOS organization.
-- If your app doesn’t restart, make sure another app isn't already using port 3000.
-## TEST LINE - EDITED AUG 4
+- `connection_invalid` – Confirm the Connection ID matches the one from WorkOS.
+- `profile_not_allowed_outside_organization` – User’s email domain must match the WorkOS organization domain.
+- Port errors – Ensure nothing else is using port 3000.
+- Directory users not showing – Ensure SCIM provisioning is active in Okta.
+
+---
+
+## 📄 License
