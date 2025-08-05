@@ -5,6 +5,11 @@ import { WorkOS } from '@workos-inc/node'
 const app = express()
 const router = express.Router()
 
+<<<<<<< HEAD
+app.set('view engine', 'ejs')
+
+=======
+>>>>>>> 6249f937f51eae2676e5e67e6374a467f64cb087
 app.use(
     session({
         secret: 'keyboard cat',
@@ -95,5 +100,21 @@ router.get('/logout', async (req, res) => {
         res.render('error.ejs', { error: error })
     }
 })
+
+router.get('/directory-users', async (req, res) => {
+    try {
+        const users = await workos.directorySync.listUsers({
+            directory: 'directory_01K1VSKWN2V0HSMKW6M86CG47E', 
+        })
+        console.log(users.data); 
+
+        res.render('directory_users.ejs', { users: users.data });
+    } catch (error) {
+        console.error('Error fetching directory users:', error)
+        res.status(500).send('Error fetching directory users')
+    }
+})
+
+
 
 export default router
