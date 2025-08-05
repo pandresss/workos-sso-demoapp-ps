@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../public/stylesheets/style.css" />
+        <link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter" />
     </head>
     
@@ -29,33 +29,34 @@
         <div class="flex">
             <div class="logged_in_div_right">
                 <div class="flex_column">
-                    <div class="flex width-941px space-between">
-                        <div>
-                            <p>Profile Details</p>
+                    <div class="flex-column">
+                        <div class="flex space-between">
+                            <div>
+                                <h2>User Verified: <%= verify_factor.valid %></h2>
+                            </div>
+                            <div>
+                                <a href="/"><button class="button">Go Back Home</button></a>
+                            </div>
                         </div>
-                        <div>
-
-                        <a href="/directory-users">
-                            <button class="button nav-item">
-                                            View Directory
-                                 </button>
-                            </a>
-
-                            <a href="/logout">
-                                <button class="button button-outline">
-                                    Log Out
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <pre id="noborder" class="prettyprint noborder">
-                            <%= profile %>
-                        </pre>
+                        <table class="width-725px">
+                            <tr>
+                                <th>ID</th>
+                                <th>Created At</th>
+                                <% if (type === 'sms') { %>
+                                <th>Expires At</th>
+                                <% } %>
+                            </tr>
+                            <tr>
+                                <td><%= verify_factor.challenge.authentication_factor_id %></td>
+                                <td><%= verify_factor.challenge.created_at %></td>
+                                <% if (type === 'sms') { %>
+                                <td><%= verify_factor.challenge.expires_at %></td>
+                                <% } %>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     </body>
 </html>

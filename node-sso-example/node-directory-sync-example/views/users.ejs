@@ -1,9 +1,8 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../public/stylesheets/style.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter" />
+        <link rel="stylesheet" href="/public/stylesheets/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
     </head>
-    
     <body class="container_success">
         <div class="logged_in_nav">
             <div class="flex">
@@ -26,36 +25,41 @@
                 </a>
             </div>
         </div>
-        <div class="flex">
+        <div class='flex'>
             <div class="logged_in_div_right">
                 <div class="flex_column">
-                    <div class="flex width-941px space-between">
+                    <div class="flex space-between width-507px">
                         <div>
-                            <p>Profile Details</p>
+                            <h2>User Details</h2>
                         </div>
                         <div>
-
-                        <a href="/directory-users">
-                            <button class="button nav-item">
-                                            View Directory
-                                 </button>
-                            </a>
-
-                            <a href="/logout">
-                                <button class="button button-outline">
-                                    Log Out
-                                </button>
+                            <a href="javascript:history.back()">
+                                <button class='button button-sm button-outline'>Back</button>
                             </a>
                         </div>
                     </div>
-                    <div>
-                        <pre id="noborder" class="prettyprint noborder">
-                            <%= profile %>
-                        </pre>
+                    <% if (users.length > 0) { %>
+                    <div class="table-container">
+                        <table class="width-507px">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                            </tr>
+                            <% for (let i = 0; i < users.length; i++) { %>
+                            <tr>
+                                <td class="ta-left"><%= users[i].first_name %> <%= users[i].last_name %></td>
+                                <td class="ta-left"><code><%= users[i].username %></code></td>
+                            </tr>
+                            <% } %>
+                        </table>
                     </div>
+                    <% } else { %>
+                    <div class="card width-40vw">
+                        <code>No Users Found</code>
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     </body>
 </html>

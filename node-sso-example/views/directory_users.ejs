@@ -1,0 +1,12 @@
+<h1>Directory Users</h1>
+
+<ul>
+  <% users.forEach(user => { %>
+    <li>
+      <strong><%= user.first_name %> <%= user.last_name %></strong><br>
+      Email: <%= user.email || user.raw_attributes.userName || 'N/A' %>
+    </li>
+  <% }) %>
+</ul>
+
+<a href="/">← Back to Home</a>
